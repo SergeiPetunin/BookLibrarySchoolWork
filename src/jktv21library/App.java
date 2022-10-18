@@ -11,89 +11,111 @@ import entity.History;
 import entity.Reader;
 import java.util.Arrays;
 import java.util.Scanner;
+import managers.BookManager;
+import managers.HistoryManager;
+import managers.ReaderManager;
 
 /**
  *
  * @author pupil
  */
 public class App {
-    private Scanner scanner = new Scanner(System.in);
-    private Book[] books = new Book[0];
+    private final Scanner scanner;
+    private final BookManager bm;
+    private final ReaderManager rm;
+    private final HistoryManager hm;
+    private Book[] books;
+    private Reader[] readers;
+    private History[] historyes;
+    
+    public App() {
+        scanner = new Scanner(System.in);
+        bm = new BookManager();
+        rm = new ReaderManager();
+        hm = new HistoryManager();
+        books = new Book[0];
+        readers = new Reader[0];
+        historyes = new History[0];
+        testAddBook();
+        testAddReader();
+    }
     
     public void run(){
         boolean repeat = true;
         do{
-            System.out.println("Funktsii prilizenija:");
-            System.out.println("0. Zakrqt' prilozenie");
-            System.out.println("1. Dobavit' knigu" );
-            System.out.println("2. Dobavit' chitatelja");
-            System.out.println("3. Vqdat' knigu");
-            System.out.println("4. Vernut' knigu");
-            System.out.println("5. Spisok knig");
-            System.out.println("6. Spisok avtorov");
-            System.out.print("Vqberite nomer funktsii:");
+            System.out.println("Функции приложения:");
+            System.out.println("0. Закрыть приложение");
+            System.out.println("1. Добавить книгу" );
+            System.out.println("2. Добавить читателя");
+            System.out.println("3. Выдать книгу");
+            System.out.println("4. Вернуть книгу");
+            System.out.println("5. Список книг");
+            System.out.println("6. Список читателей");
+            System.out.print("Выберете функцию:");
             int task = scanner.nextInt();
             scanner.nextLine();
             switch (task){
                 case 0:
-                    System.out.println("0. Zakrqt' prilozenie");
+                    System.out.println("0. Закрыть приложение");
                     repeat = false;
                     break;
                 case 1:
-                    System.out.println("1. Dobavit' knigu");
-                    Book book = new Book();
-                    System.out.println("Vvedite nazvanie knigi: ");
-                    book.setTitle(scanner.nextLine());
-                    System.out.print("Ukazite kollichestvo avtorov: ");
-                    int countAuthorsInBook = scanner.nextInt();
-                    scanner.nextLine();
-                    for (int i = 0; i < countAuthorsInBook; i++) {
-                        book.addAuthor(createAuthor());
-                    }
-                    Book[] newBook = Arrays.copyOf(books, books.length+1);
-                    newBook[newBook.length-1] = book;
-                    books = newBook;
+                    //Добавить книгу
+                    addBook(bm.createBook());
                     break;
                 case 2:
-                    System.out.println("2. Dobavit' chitatelja");
-                    Reader reader = new Reader();
+                    //Добавить читателя
+                    addReader(rm.createReader());
                     break;
                 case 3:
-                    System.out.println("3. Vqdat' knigu");
-                    History history = new History();
+                    //Добавить историю
+                    addHistory(hm.createHistory());
                     break;
                 case 4:
-                    System.out.println("4. Vernut' knigu");
+                    System.out.println("4. Вернуть книгу");
                     break;
                 case 5:
-                    System.out.println("5. Spisok knig");
-                    for (int i = 0; i < books.length; i++) {
-                        Book book1 = books[i];
-                        System.out.printf(i+1+". %s. ",book1.getTitle());
-                        for (int j = 0; j < book1.getAuthors().length; j++) {
-                            System.out.printf("%s %s.%n",
-                                    book1.getAuthors()[j].getFirstname(),
-                                    book1.getAuthors()[j].getLastname());
-                            
-                        }
-                    }
+                    //Список книг
+                    bm.printListBooks(books);
                     break;
                 case 6:
-                    System.out.println("6. Spisok avtorov");
-                    break;
-                default:
-                    System.out.println("Vqberite nomer funktsii iz spiska!");
+                    //Список читателей
+                    rm.printListReaders(readers);
+                
             }
         }while(repeat);
-        System.out.println("Poka!");
+        System.out.println("Пока!");
     }
-
-    private Author createAuthor() {
-        Author author = new Author();
-        System.out.println("Vvedite imja: ");
-        author.setFirstname(scanner.nextLine());
-        System.out.println("Vvedite familiju: ");
-        author.setLastname(scanner.nextLine());
-        return author;
+    
+    private void addBook(Book book){
+        books = Arrays.copyOf(books, books.length+1);
+        books[books.length-1] = book;
+    };
+    
+    private void addReader(Reader reader){
+        readers = Arrays.copyOf(readers, readers.length+1);
+        readers[readers.length-1] = reader;
+    };
+    
+    private void addHistoryes(History history){
+        historyes = Arrays.copyOf(historyes, historyes.length+1);
+        historyes[historyes.length-1] = history;
+    };
+    
+    private void testAddBook() {
+        Book book = new Book();
+        book.setTitle("Voina i mir");
+        Author author = new Author("Lev","Tolstoi");
+        book.addAuthor(author);
+        this.books = Arrays.copyOf(books, books.length+1);
+        this.books[this.books.length - 1] = book;
     }
+    
+    private void testAddReader() {
+        Reader reader = new Reader("Ivan", "Ivanov","515151");
+        readers = Arrays.copyOf(readers, readers.length + 1);
+        readers[readers.length - 1] = reader;
+    }
+    
+    
 }
