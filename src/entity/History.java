@@ -12,6 +12,7 @@ import java.util.Date;
  * @author pupil
  */
 public class History {
+    //fields
     private Reader reader;
     private Book book;
     private Date takeOnBook;

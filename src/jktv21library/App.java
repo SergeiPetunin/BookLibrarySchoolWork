@@ -51,12 +51,13 @@ public class App {
             System.out.println("4. Вернуть книгу");
             System.out.println("5. Список книг");
             System.out.println("6. Список читателей");
+            System.out.println("7. История");
+            System.out.println("7. Изменить книгу");
             System.out.print("Выберете функцию:");
             int task = scanner.nextInt();
             scanner.nextLine();
             switch (task){
                 case 0:
-                    System.out.println("0. Закрыть приложение");
                     repeat = false;
                     break;
                 case 1:
@@ -68,11 +69,12 @@ public class App {
                     addReader(rm.createReader());
                     break;
                 case 3:
-                    //Добавить историю
-                    addHistory(hm.createHistory());
+                    //Выдать книгу
+                    addHistoryes(hm.takeOnBook(readers, books));
                     break;
                 case 4:
-                    System.out.println("4. Вернуть книгу");
+                    //Вернуть книгу
+                    historyes = hm.returnBook(historyes);
                     break;
                 case 5:
                     //Список книг
@@ -81,7 +83,14 @@ public class App {
                 case 6:
                     //Список читателей
                     rm.printListReaders(readers);
-                
+                    break;
+                case 7:
+                    //История
+                    hm.printListTakeOnBooks(historyes);
+                    break;
+                case 8:
+                    //Изменить книгу
+                    break;
             }
         }while(repeat);
         System.out.println("Пока!");
@@ -101,6 +110,8 @@ public class App {
         historyes = Arrays.copyOf(historyes, historyes.length+1);
         historyes[historyes.length-1] = history;
     };
+    
+    
     
     private void testAddBook() {
         Book book = new Book();

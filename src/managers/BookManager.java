@@ -20,6 +20,12 @@ public class BookManager {
         scanner = new Scanner(System.in);
     }
     
+    public Book editBook(){
+        Book book = new Book();
+        
+        return book;
+    }
+    
     public Book createBook(){
         Book book = new Book();
         System.out.println("Введите название книги: ");

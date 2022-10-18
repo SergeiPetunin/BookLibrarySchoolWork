@@ -27,7 +27,7 @@ public class ReaderManager {
         System.out.println("Введите фамилию: ");
         reader.setLastname(scanner.nextLine());
         System.out.println("Введите : ");
-        reader.setFirstname(scanner.nextLine());
+        reader.setPhone(scanner.nextLine());
         return reader;
     }
     
