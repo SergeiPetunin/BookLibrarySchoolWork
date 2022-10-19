@@ -48,6 +48,8 @@ public class BookManager {
         return author;
     }
     
+   
+    
     public void printListBooks(Book[] books) {
         for (int i = 0; i < books.length; i++) {
             Book book1 = books[i];
@@ -62,5 +64,20 @@ public class BookManager {
 
             }
         }
+    }
+
+    public Book[] changeBook(Book[] books) {
+        System.out.println("Список книг: ");
+        this.printListBooks(books);
+        System.out.println("Выберете номер книги из списка: ");
+        int numberBook = scanner.nextInt(); scanner.nextLine();
+        System.out.println("Название книги: " + books[numberBook - 1].getTitle());
+        System.out.println("Заменить? (y/n): ");
+        String task = scanner.nextLine();
+        if("y".equals(task)) {
+            System.out.println("Введите новое имя");
+            books[numberBook - 1].setTitle(scanner.nextLine());
+        }
+        System.out.println("Авторов у книги");
     }
 }

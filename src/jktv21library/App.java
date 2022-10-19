@@ -52,7 +52,7 @@ public class App {
             System.out.println("5. Список книг");
             System.out.println("6. Список читателей");
             System.out.println("7. История");
-            System.out.println("7. Изменить книгу");
+            System.out.println("8. Изменить читателя");
             System.out.print("Выберете функцию:");
             int task = scanner.nextInt();
             scanner.nextLine();
@@ -86,10 +86,15 @@ public class App {
                     break;
                 case 7:
                     //История
-                    hm.printListTakeOnBooks(historyes);
+                    hm.printHistoryList(historyes);
                     break;
                 case 8:
+                    //Изменить читателя
+                    readers = rm.changeReader(readers);
+                    break;
+                case 9:
                     //Изменить книгу
+                    books = bm.changeBook(books);
                     break;
             }
         }while(repeat);

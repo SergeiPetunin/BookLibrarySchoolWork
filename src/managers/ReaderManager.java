@@ -34,12 +34,45 @@ public class ReaderManager {
     
     public void printListReaders(Reader[] readers) {
         for(int i  = 0; i < readers.length; i++) {
-                        System.out.printf("%d. %s %s %s%n"
-                                ,i+1
-                                ,readers[i].getFirstname()
-                                ,readers[i].getLastname()
-                                ,readers[i].getPhone()
-                        );
-                    }
+            System.out.printf("%d. %s %s %s%n"
+                    ,i+1
+                    ,readers[i].getFirstname()
+                    ,readers[i].getLastname()
+                    ,readers[i].getPhone()
+            );
+        }
     }
+
+    public Reader[] changeReader(Reader[] readers) {
+        System.out.println("Список читателей: ");
+        this.printListReaders(readers);
+        System.out.println("Выберете номер читателя из списка: ");
+        int numberReader = scanner.nextInt(); scanner.nextLine();
+        System.out.println("Имя: " + readers[numberReader - 1].getFirstname());
+        System.out.println("Заменить? (y/n): ");
+        String task = scanner.nextLine();
+        if("y".equals(task)) {
+            System.out.println("Введите новое имя");
+            readers[numberReader - 1].setFirstname(scanner.nextLine());
+        }
+        System.out.println("Фамилия: " + readers[numberReader - 1].getLastname());
+        System.out.println("Заменить? (y/n): ");
+        task = scanner.nextLine();
+        if("y".equals(task)) {
+            System.out.println("Введите новоую фамилию");
+            readers[numberReader - 1].setLastname(scanner.nextLine());
+        }
+        System.out.println("Телефон: " + readers[numberReader - 1].getPhone());
+        System.out.println("Заменить? (y/n): ");
+        task = scanner.nextLine();
+        if("y".equals(task)) {
+            System.out.println("Введите новый телефон");
+            readers[numberReader - 1].setPhone(scanner.nextLine());
+        }
+        System.out.println("Изменённый читатель: " + readers[numberReader - 1].toString());
+        
+        
+        return readers;
+    }
+    
 }

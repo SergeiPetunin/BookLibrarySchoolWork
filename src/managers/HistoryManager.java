@@ -8,7 +8,7 @@ package managers;
 import entity.Book;
 import entity.History;
 import entity.Reader;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -52,25 +52,29 @@ public class HistoryManager {
         return history;
     }
     
-    public History[] returnBook(History[] histories){
+    public History[] returnBook(History[] historyes){
         //Выбрать номер книги из списка выданных книг
         //В выбранную книгу добавить дату возврата
-        System.out.println("Список выданных книг:");
-        this.printListTakeOnBooks(histories);
+        System.out.println("Список выданных книг: ");
+        this.printHistoryList(historyes);
         System.out.print("Выберите номер книги для возврата: ");
         int numberToReturnBook = scanner.nextInt(); scanner.nextLine();
-        histories[numberToReturnBook - 1].setReturnBook(new GregorianCalendar().getTime());
-        return histories;
+        historyes[numberToReturnBook - 1].setReturnBook(new GregorianCalendar().getTime());
+        return historyes;
     }
     
-    public void printListTakeOnBooks(History[] historyes) {
+    public void printHistoryList(History[] historyes) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyy");
         for(int i  = 0; i < historyes.length; i++) {
-            System.out.printf("%d. %s %s %s%n %s%n"
-                    ,i+1
-                    ,historyes[i].getBook()
-                    ,historyes[i].getReader()
-                    ,"Книга Выдана: " + historyes[i].getTakeOnBook()
-                    ,"Книга Возращена: " + historyes[i].getReturnBook()
+            History history = historyes[i];
+            if(history.getReturnBook() == null)
+            System.out.printf("%d. %s. Выдана: %s Читает:  %s %s. Telefon: %s%n"
+                ,i + 1
+                ,history.getBook().getTitle()
+                ,sdf.format(history.getTakeOnBook())
+                ,history.getReader().getFirstname()
+                ,history.getReader().getLastname()
+                ,history.getReader().getPhone()
             );
         }
     }  
