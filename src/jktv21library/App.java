@@ -12,6 +12,7 @@ import entity.Reader;
 import java.util.Arrays;
 import java.util.Scanner;
 import managers.BookManager;
+import managers.DataManager;
 import managers.HistoryManager;
 import managers.ReaderManager;
 
@@ -24,6 +25,7 @@ public class App {
     private final BookManager bm;
     private final ReaderManager rm;
     private final HistoryManager hm;
+    private DataManager dm;
     private Book[] books;
     private Reader[] readers;
     private History[] historyes;
@@ -33,10 +35,11 @@ public class App {
         bm = new BookManager();
         rm = new ReaderManager();
         hm = new HistoryManager();
-        books = new Book[0];
+        dm = new DataManager();
+        books = dm.loadBooksFromFile(); //new Book[0];
         readers = new Reader[0];
         historyes = new History[0];
-        testAddBook();
+        //testAddBook();
         testAddReader();
     }
     
@@ -63,6 +66,8 @@ public class App {
                 case 1:
                     //Добавить книгу
                     addBook(bm.createBook());
+                    DataManager dm = new DataManager();
+                    dm.saveBookToFile(books);
                     break;
                 case 2:
                     //Добавить читателя
@@ -132,6 +137,5 @@ public class App {
         readers = Arrays.copyOf(readers, readers.length + 1);
         readers[readers.length - 1] = reader;
     }
-    
-    
+
 }
