@@ -75,7 +75,25 @@ public class HistoryManager {
                 ,history.getReader().getFirstname()
                 ,history.getReader().getLastname()
                 ,history.getReader().getPhone()
+                
             );
         }
-    }  
+    }
+
+    public void printReturnHistoryList(History[] historyes) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyy");
+        for(int i  = 0; i < historyes.length; i++) {
+            History history = historyes[i];
+            if(history.getReturnBook() != null)
+            System.out.printf("%d. %s. Вернул: %s   %s %s. Telefon: %s%n"
+                ,i + 1
+                ,history.getBook().getTitle()
+                ,sdf.format(history.getReturnBook())
+                ,history.getReader().getFirstname()
+                ,history.getReader().getLastname()
+                ,history.getReader().getPhone()
+                
+            );
+        }
+    }
 }

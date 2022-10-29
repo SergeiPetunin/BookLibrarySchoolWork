@@ -37,13 +37,14 @@ public class App {
         hm = new HistoryManager();
         dm = new DataManager();
         books = dm.loadBooksFromFile(); //new Book[0];
-        readers = new Reader[0];
-        historyes = new History[0];
-        //testAddBook();
-        testAddReader();
+        readers = dm.loadReadersFromFile();
+        historyes = dm.loadHistoryFromFile();
+//        testAddBook();
+//        testAddReader();
     }
     
     public void run(){
+        DataManager dm = new DataManager();
         boolean repeat = true;
         do{
             System.out.println("Функции приложения:");
@@ -56,6 +57,7 @@ public class App {
             System.out.println("6. Список читателей");
             System.out.println("7. История");
             System.out.println("8. Изменить читателя");
+            System.out.println("9. Изменить книгу");
             System.out.print("Выберете функцию:");
             int task = scanner.nextInt();
             scanner.nextLine();
@@ -66,20 +68,22 @@ public class App {
                 case 1:
                     //Добавить книгу
                     addBook(bm.createBook());
-                    DataManager dm = new DataManager();
                     dm.saveBookToFile(books);
                     break;
                 case 2:
                     //Добавить читателя
                     addReader(rm.createReader());
+                    dm.saveReaderToFile(readers);
                     break;
                 case 3:
                     //Выдать книгу
                     addHistoryes(hm.takeOnBook(readers, books));
+                    dm.saveBookHistory(historyes);
                     break;
                 case 4:
                     //Вернуть книгу
                     historyes = hm.returnBook(historyes);
+                    dm.saveBookHistory(historyes);
                     break;
                 case 5:
                     //Список книг
@@ -100,6 +104,10 @@ public class App {
                 case 9:
                     //Изменить книгу
                     books = bm.changeBook(books);
+                    break;
+                case 10:
+                    //История возврата
+                    hm.printReturnHistoryList(historyes);
                     break;
             }
         }while(repeat);
