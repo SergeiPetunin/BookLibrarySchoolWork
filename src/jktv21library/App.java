@@ -10,6 +10,7 @@ import entity.Book;
 import entity.History;
 import entity.Reader;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import managers.BookManager;
 import managers.DataManager;
@@ -47,69 +48,79 @@ public class App {
         DataManager dm = new DataManager();
         boolean repeat = true;
         do{
-            System.out.println("Функции приложения:");
-            System.out.println("0. Закрыть приложение");
-            System.out.println("1. Добавить книгу" );
-            System.out.println("2. Добавить читателя");
-            System.out.println("3. Выдать книгу");
-            System.out.println("4. Вернуть книгу");
-            System.out.println("5. Список книг");
-            System.out.println("6. Список читателей");
-            System.out.println("7. История");
-            System.out.println("8. Изменить читателя");
-            System.out.println("9. Изменить книгу");
-            System.out.print("Выберете функцию:");
-            int task = scanner.nextInt();
-            scanner.nextLine();
-            switch (task){
-                case 0:
-                    repeat = false;
-                    break;
-                case 1:
-                    //Добавить книгу
-                    addBook(bm.createBook());
-                    dm.saveBookToFile(books);
-                    break;
-                case 2:
-                    //Добавить читателя
-                    addReader(rm.createReader());
-                    dm.saveReaderToFile(readers);
-                    break;
-                case 3:
-                    //Выдать книгу
-                    addHistoryes(hm.takeOnBook(readers, books));
-                    dm.saveBookHistory(historyes);
-                    break;
-                case 4:
-                    //Вернуть книгу
-                    historyes = hm.returnBook(historyes);
-                    dm.saveBookHistory(historyes);
-                    break;
-                case 5:
-                    //Список книг
-                    bm.printListBooks(books);
-                    break;
-                case 6:
-                    //Список читателей
-                    rm.printListReaders(readers);
-                    break;
-                case 7:
-                    //История
-                    hm.printHistoryList(historyes);
-                    break;
-                case 8:
-                    //Изменить читателя
-                    readers = rm.changeReader(readers);
-                    break;
-                case 9:
-                    //Изменить книгу
-                    books = bm.changeBook(books);
-                    break;
-                case 10:
-                    //История возврата
-                    hm.printReturnHistoryList(historyes);
-                    break;
+            try {
+                System.out.println("Функции приложения:");
+                System.out.println("0. Закрыть приложение");
+                System.out.println("1. Добавить книгу" );
+                System.out.println("2. Добавить читателя");
+                System.out.println("3. Выдать книгу");
+                System.out.println("4. Вернуть книгу");
+                System.out.println("5. Список книг");
+                System.out.println("6. Список читателей");
+                System.out.println("7. История");
+                System.out.println("8. Изменить читателя");
+                System.out.println("9. Изменить книгу");
+                System.out.print("Выберете функцию:");
+
+                int task = scanner.nextInt();
+                scanner.nextLine();
+                switch (task){
+                    case 0:
+                        repeat = false;
+                        break;
+                    case 1:
+                        //Добавить книгу
+                        addBook(bm.createBook());
+                        dm.saveBookToFile(books);
+                        break;
+                    case 2:
+                        //Добавить читателя
+                        addReader(rm.createReader());
+                        dm.saveReaderToFile(readers);
+                        break;
+                    case 3:
+                        //Выдать книгу
+                        addHistoryes(hm.takeOnBook(readers, books));
+                        dm.saveBookHistory(historyes);
+                        break;
+                    case 4:
+                        //Вернуть книгу
+                        historyes = hm.returnBook(historyes);
+                        dm.saveBookHistory(historyes);
+                        break;
+                    case 5:
+                        //Список книг
+                        bm.printListBooks(books);
+                        break;
+                    case 6:
+                        //Список читателей
+                        rm.printListReaders(readers);
+                        break;
+                    case 7:
+                        //История
+                        hm.printHistoryList(historyes);
+                        break;
+                    case 8:
+                        //Изменить читателя
+                        readers = rm.changeReader(readers);
+                        break;
+                    case 9:
+                        //Изменить книгу
+                        books = bm.changeBook(books);
+                        break;
+                    case 10:
+                        //История возврата
+                        hm.printReturnHistoryList(historyes);
+                        break;
+                    default:
+                        System.out.println("Введите номер функции!");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Введите номер функции!");
+                System.out.println(e);
+                scanner.nextLine();
             }
+            
         }while(repeat);
         System.out.println("Пока!");
     }
