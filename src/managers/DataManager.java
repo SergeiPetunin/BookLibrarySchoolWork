@@ -40,6 +40,7 @@ public class DataManager {
             FileOutputStream fileOutputStream = new FileOutputStream(FILENAMEBOOK);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(books);
+            objectOutputStream.flush();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, "Нет такого файла", ex);
         } catch (IOException ex) {
@@ -69,6 +70,7 @@ public class DataManager {
             FileOutputStream fileOutputStream = new FileOutputStream(FILENAMEREADER);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(readers);
+            objectOutputStream.flush();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, "Нет такого файла", ex);
         } catch (IOException ex) {
@@ -98,6 +100,7 @@ public class DataManager {
             FileOutputStream fileOutputStream = new FileOutputStream(FILENAMETAKEHISTORY);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(historyes);
+            objectOutputStream.flush();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, "Нет такого файла", ex);
         } catch (IOException ex) {
