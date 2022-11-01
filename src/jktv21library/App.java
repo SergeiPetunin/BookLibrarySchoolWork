@@ -5,7 +5,6 @@
  */
 package jktv21library;
 
-import entity.Author;
 import entity.Book;
 import entity.History;
 import entity.Reader;
@@ -60,6 +59,7 @@ public class App {
                 System.out.println("7. История");
                 System.out.println("8. Изменить читателя");
                 System.out.println("9. Изменить книгу");
+                System.out.println("10. История возврата");
                 System.out.print("Выберете функцию:");
 
                 int task = scanner.nextInt();
@@ -142,19 +142,19 @@ public class App {
     
     
     
-    private void testAddBook() {
-        Book book = new Book();
-        book.setTitle("Voina i mir");
-        Author author = new Author("Lev","Tolstoi");
-        book.addAuthor(author);
-        this.books = Arrays.copyOf(books, books.length+1);
-        this.books[this.books.length - 1] = book;
-    }
-    
-    private void testAddReader() {
-        Reader reader = new Reader("Ivan", "Ivanov","515151");
-        readers = Arrays.copyOf(readers, readers.length + 1);
-        readers[readers.length - 1] = reader;
-    }
+//    private void testAddBook() {
+//        Book book = new Book();
+//        book.setTitle("Voina i mir");
+//        Author author = new Author("Lev","Tolstoi");
+//        book.addAuthor(author);
+//        this.books = Arrays.copyOf(books, books.length+1);
+//        this.books[this.books.length - 1] = book;
+//    }
+//    
+//    private void testAddReader() {
+//        Reader reader = new Reader("Ivan", "Ivanov","515151");
+//        readers = Arrays.copyOf(readers, readers.length + 1);
+//        readers[readers.length - 1] = reader;
+//    }
 
 }
